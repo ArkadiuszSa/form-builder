@@ -31,9 +31,6 @@ export class FormPreviewElementComponent implements OnInit {
     this.formElementModel.type = this.elementData.type;
     this.formElementModel.condition = this.elementData.condition;
     this.formElementModel.number = this.elementData.number;
-    // this.formPreviewElementService.addAnswerToDatabase(this.elementData._id,this.elementData.parentId);
-
-    //this.formPreviewElementService.addAnswerToDatabase(this.elementData._id, this.elementData.parentId);
 
     this.formPreviewElementService.addAnswerToList({
       _id: this.elementData._id,
@@ -53,7 +50,6 @@ export class FormPreviewElementComponent implements OnInit {
     }
     else {
       this.formElements=[];
-      //usun odpowiedzi dla dzieci
     }
 
     this.formPreviewElementService.updateAnswer({
@@ -63,10 +59,6 @@ export class FormPreviewElementComponent implements OnInit {
       answer: this.answer,
       question: this.formElementModel.question
     })
-
-    //save answer with id to database
-    
-    
   }
 
   loadChildren() {
@@ -90,7 +82,4 @@ export class FormPreviewElementComponent implements OnInit {
   checkNumber(val) {
     return isNaN(val);
   }
-
-
-
 }

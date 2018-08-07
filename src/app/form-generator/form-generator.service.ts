@@ -105,9 +105,7 @@ export class FormGeneratorService {
         }
       }
   }
-
-
-
+  
   public deleteElementWithAllChildsFromDb(elementId) {
     let self=this;
     let response = this.getChildsForParentFromDb(elementId)
@@ -146,7 +144,6 @@ export class FormGeneratorService {
     }
   }
 
-///////////////////////////////
   addElementToDatabase(parentId) {
     var requestDb = indexedDB.open("FormBuilderDatabase", 1);
     let _id = new Date().valueOf();

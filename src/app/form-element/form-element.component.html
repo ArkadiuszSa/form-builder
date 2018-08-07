@@ -13,12 +13,12 @@
               </select>
 
                 <ng-container *ngIf='formElementModel.type !== "Yes/No"; else yesNoInput'>
-                  <input   class='field-input text-input' name="condition-value" [(ngModel)]='formElementModel.condition.value' #condition1="ngModel" (blur)='modelChange()'>
+                  <input   class='field-input text-input' name="condition-value" [(ngModel)]='formElementModel.condition.value' #condition="ngModel" (blur)='modelChange()'>
                   <br>
-                  <div class='alert-container' *ngIf="formElementModel.condition.value === '' && formElementModel.type!=='Yes/No' && (condition1?.dirty || condition1?.touched)">
+                  <div class='alert-container' *ngIf="formElementModel.condition.value === '' && formElementModel.type!=='Yes/No' && (condition?.dirty || condition?.touched)">
                     Condition is required
                   </div>
-                  <div class='alert-container' *ngIf="checkNumber(formElementModel.condition.value)&& formElementModel.type === 'Number' && (condition1?.dirty || condition1?.touched)">
+                  <div class='alert-container' *ngIf="checkNumber(formElementModel.condition.value)&& formElementModel.type === 'Number' && (condition?.dirty || condition?.touched)">
                     Answer must be a number
                   </div>
                 </ng-container>
@@ -40,13 +40,14 @@
         </ng-container>
         
       
-        <p class='form-field'>
+        <div class='form-field'>
           <label class='field-label'> Question </label>
-          <input class='field-input text-input' name="question" [(ngModel)]='formElementModel.question' #question="ngModel" (blur)='modelChange()'>  
-        </p>
-        <div class='alert-container' *ngIf="formElementModel.question === '' && (question.dirty || question.touched)">
-            Question is required
+          <input class='field-input text-input question-input' name="question" [(ngModel)]='formElementModel.question' #question="ngModel" (blur)='modelChange()'>  
+          <div class='alert-container' *ngIf="formElementModel.question === '' && (question.dirty || question.touched)">
+              Question is required
+          </div>
         </div>
+
       
         <p class='form-field'>
           <label class='field-label'> Type </label>

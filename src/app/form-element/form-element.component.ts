@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGeneratorService } from './../form-generator/form-generator.service'
-import { isNumber } from 'util';
 @Component({
   selector: 'app-form-element',
   templateUrl: './form-element.component.html',
@@ -11,8 +10,6 @@ export class FormElementComponent implements OnInit {
   @Input() elementData;
   @Output() removeElement:EventEmitter<any> = new EventEmitter<any>();
 
-
-  //public conditionSelectOptions = ['Equals', 'Grather than', 'Less than']
   public formElementModel = {
     question: '',
     type: 'Text',
@@ -36,21 +33,18 @@ export class FormElementComponent implements OnInit {
 
   ngOnInit() {
     this.reloadChilds();
-    //this.formGeneratorService.getAll()
-    this.formElementModel.question=this.elementData.question;
-    this.formElementModel.type=this.elementData.type;
-    this.formElementModel.condition.type=this.elementData.condition.type;
-    this.formElementModel.condition.value= this.elementData.condition.value;
+    this.formElementModel.question = this.elementData.question;
+    this.formElementModel.type = this.elementData.type;
+    this.formElementModel.condition.type = this.elementData.condition.type;
+    this.formElementModel.condition.value = this.elementData.condition.value;
     this.formElementModel.number = this.elementData.number;
-    this.lastType=this.elementData.type;
+    this.lastType = this.elementData.type;
   }
 
-  
-
   addSubInput(){
-    let self=this;
+    let self = this;
     let response = this.formGeneratorService.addElementToDatabase(this.elementData._id);
-    response.then( (res)=>{
+    response.then( (res) => {
      self.reloadChilds();
     })
   }
@@ -63,7 +57,7 @@ export class FormElementComponent implements OnInit {
   removeChild($event){
     let index= this.subInputList.indexOf($event);
     this.subInputList.splice(index,1);
-    console.log()
+   
     if(this.subInputList.length===0){
       this.formElementModel.condition.active = false;
     }else {
@@ -77,7 +71,6 @@ export class FormElementComponent implements OnInit {
     response.then(function(resoult){
       if(Array.isArray(resoult))
       self.subInputList = resoult;
-
       self.subInputList.map((element, i) => {
         let number=i+1
         element.number = self.formElementModel.number +'.' +number.toString();
@@ -88,7 +81,6 @@ export class FormElementComponent implements OnInit {
       }else {
         self.formElementModel.condition.active = true;
       }
-      console.log(self.subInputList)
     })
   }
 
@@ -102,12 +94,6 @@ export class FormElementComponent implements OnInit {
     if(this.formElementModel.type === "Number" && this.lastType!=="Number" && this.checkNumber(this.formElementModel.condition.value) ){
       this.formElementModel.condition.value = '';
     }
-    console.log(this.formElementModel.type)
-    console.log(this.formElementModel.type === "Number" && this.lastType!=="Number" && !this.checkNumber(this.formElementModel.condition.value));
-    console.log(this.formElementModel.type === "Number")
-    console.log(this.lastType!=="Number")
-    console.log(!this.checkNumber(this.formElementModel.condition.value))
-
     this.lastType=this.formElementModel.type;
     this.formGeneratorService.updateFormElement({
       _id: this.elementData._id,

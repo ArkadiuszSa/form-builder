@@ -13,15 +13,12 @@ export class ResultFormService {
     requestDb.onupgradeneeded = function() {
       var db = requestDb.result;
       var store = db.createObjectStore("AnswerStore", {keyPath: "_id"});
-     //let index = store.createIndex("parentIdIndex", ["parentId"])
     };
     return new Promise((resolve, reject)=>{
       requestDb.onsuccess = function() {
         var db = requestDb.result;
         var tx = db.transaction("AnswerStore", "readwrite");
-        var store = tx.objectStore("AnswerStore");
-        //var index = store.index("parentIdIndex");
-  
+        var store = tx.objectStore("AnswerStore");  
         let getChildren = store.getAll()
   
         getChildren.onsuccess = () => {

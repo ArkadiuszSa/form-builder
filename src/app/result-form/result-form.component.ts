@@ -18,7 +18,6 @@ export class ResultFormComponent implements OnInit {
     this.resultFormService.getAll().then((res)=>{
       if(Array.isArray(res)){
         self.answersList=res;
-        console.log(res)
       }
     });
   }
