@@ -1,26 +1,28 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGeneratorService } from './../form-generator/form-generator.service'
 import { FormPreviewElementService } from './form-preview-element.service'
+import { FormElement } from './form-element.model'
+import { FormElementData } from './form-element-data.model'
 @Component({
   selector: 'app-form-preview-element',
   templateUrl: './form-preview-element.component.html',
   styleUrls: ['./form-preview-element.component.scss']
 })
 export class FormPreviewElementComponent implements OnInit {
-  @Input() elementData;
+  @Input() elementData: FormElementData;
 
-  public formElementModel = {
+  public formElementModel:FormElement = {
     question:'',
     type:'',
     number: '',
     condition: {
-      active:'',
+      active: '',
       type:'',
       value:''
     }
   }
-  public answer='';
-  public formElements;
+  public answer: string = '';
+  public formElements: Array<FormElementData>;
   constructor(
     public formGeneratorService: FormGeneratorService,
     public formPreviewElementService: FormPreviewElementService
@@ -29,7 +31,8 @@ export class FormPreviewElementComponent implements OnInit {
   ngOnInit() {
     this.formElementModel.question = this.elementData.question;
     this.formElementModel.type = this.elementData.type;
-    this.formElementModel.condition = this.elementData.condition;
+    this.formElementModel.condition.type = this.elementData.condition.type;
+    this.formElementModel.condition.value = this.elementData.condition.value;
     this.formElementModel.number = this.elementData.number;
 
     this.formPreviewElementService.addAnswerToList({
@@ -41,15 +44,15 @@ export class FormPreviewElementComponent implements OnInit {
   }
 
   checkCondition() {
-    if(this.formElementModel.condition.type === 'Equals' && this.formElementModel.condition.value === this.answer) {
-      this.loadChildren();
-    }else if(this.formElementModel.condition.type === 'GratherThan' && this.formElementModel.condition.value < this.answer) {
-      this.loadChildren();
-    }else if(this.formElementModel.condition.type === 'LessThan' && this.formElementModel.condition.value > this.answer) {
+
+    if( (this.formElementModel.condition.type === 'Equals' && this.formElementModel.condition.value === this.answer) ||
+        (this.formElementModel.condition.type === 'GratherThan' && this.formElementModel.condition.value < this.answer) ||
+        (this.formElementModel.condition.type === 'LessThan' && this.formElementModel.condition.value > this.answer) 
+    ){
       this.loadChildren();
     }
     else {
-      this.formElements=[];
+      this.formElements = [];
     }
 
     this.formPreviewElementService.updateAnswer({
@@ -65,21 +68,21 @@ export class FormPreviewElementComponent implements OnInit {
     let self=this;
     let response=this.formGeneratorService.getChildsForParentFromDb(this.elementData._id);
     response.then(function(resoult){
-      self.formElements = resoult;
-      self.formElements.map((element, i) => {
-        let number=i+1
+      self.formElements = resoult as Array<FormElementData>;
+      self.formElements.map((element :FormElementData, i:number) => {
+        let number:number =i+1
         element.number = self.formElementModel.number +'.' +number.toString();
         element.parentId=self.elementData._id;
       })
     })
   }
 
-  radioButtonChecked(val) {
+  radioButtonChecked(val:string) {
     this.answer = val;
     this.checkCondition();
   }
 
-  checkNumber(val) {
+  checkNumber(val:any): boolean {
     return isNaN(val);
   }
 }

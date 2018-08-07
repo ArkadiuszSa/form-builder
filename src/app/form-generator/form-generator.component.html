@@ -1,8 +1,8 @@
 <div class='form-generator-content'>
 
-  <ng-container *ngFor='let element of formElements'>
+  <ng-container *ngFor='let formElement of formElements'>
       <app-form-element class='form-container' 
-        [elementData] = "element"
+        [formElementData] = "formElement"
         (removeElement) = "removeChild($event)"
       ></app-form-element> 
   </ng-container>

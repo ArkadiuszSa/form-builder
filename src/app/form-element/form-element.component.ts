@@ -1,5 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGeneratorService } from './../form-generator/form-generator.service'
+import { FormElement } from './form-element.model'
+import { FormElementData } from './form-element-data.model'
 @Component({
   selector: 'app-form-element',
   templateUrl: './form-element.component.html',
@@ -7,25 +9,22 @@ import { FormGeneratorService } from './../form-generator/form-generator.service
 })
 
 export class FormElementComponent implements OnInit {
-  @Input() elementData;
+  @Input() formElementData: FormElementData;
   @Output() removeElement:EventEmitter<any> = new EventEmitter<any>();
 
-  public formElementModel = {
+  public formElementModel: FormElement = {
     question: '',
     type: 'Text',
     number: '',
     condition: {
-      active:false,
+      active: false,
       type: 'Equals',
       value: ''
     }
   }
-  public conditionRadioButton= {
-    yes:'',
-    no:'',
-  }
-  public subInputList = [];
-  private lastType;
+  
+  public subInputList: Array<FormElementData> = [];
+  private lastType: string;
   constructor(
     public formGeneratorService: FormGeneratorService
 
@@ -33,25 +32,25 @@ export class FormElementComponent implements OnInit {
 
   ngOnInit() {
     this.reloadChilds();
-    this.formElementModel.question = this.elementData.question;
-    this.formElementModel.type = this.elementData.type;
-    this.formElementModel.condition.type = this.elementData.condition.type;
-    this.formElementModel.condition.value = this.elementData.condition.value;
-    this.formElementModel.number = this.elementData.number;
-    this.lastType = this.elementData.type;
+    this.formElementModel.question = this.formElementData.question;
+    this.formElementModel.type = this.formElementData.type;
+    this.formElementModel.condition.type = this.formElementData.condition.type;
+    this.formElementModel.condition.value = this.formElementData.condition.value;
+    this.formElementModel.number = this.formElementData.number;
+    this.lastType = this.formElementData.type;
   }
 
   addSubInput(){
     let self = this;
-    let response = this.formGeneratorService.addElementToDatabase(this.elementData._id);
+    let response = this.formGeneratorService.addElementToDatabase(this.formElementData._id);
     response.then( (res) => {
      self.reloadChilds();
     })
   }
 
   deleteOnClick() {
-    this.removeElement.emit(this.elementData);
-    this.formGeneratorService.deleteElementWithAllChildsFromDb(this.elementData._id);
+    this.removeElement.emit(this.formElementData);
+    this.formGeneratorService.deleteElementWithAllChildsFromDb(this.formElementData._id);
   }
 
   removeChild($event){
@@ -67,7 +66,7 @@ export class FormElementComponent implements OnInit {
 
   reloadChilds(){
     let self=this;
-    let response=this.formGeneratorService.getChildsForParentFromDb(this.elementData._id);
+    let response=this.formGeneratorService.getChildsForParentFromDb(this.formElementData._id);
     response.then(function(resoult){
       if(Array.isArray(resoult))
       self.subInputList = resoult;
@@ -96,8 +95,8 @@ export class FormElementComponent implements OnInit {
     }
     this.lastType=this.formElementModel.type;
     this.formGeneratorService.updateFormElement({
-      _id: this.elementData._id,
-      parentId: this.elementData.parentId,
+      _id: this.formElementData._id,
+      parentId: this.formElementData.parentId,
       question: this.formElementModel.question,
       type: this.formElementModel.type,
       condition: {

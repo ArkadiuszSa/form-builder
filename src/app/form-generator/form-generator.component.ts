@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGeneratorService } from './form-generator.service'
+import { FormElementData } from './form-element-data.model'
 @Component({
   selector: 'app-form-generator',
   templateUrl: './form-generator.component.html',
@@ -7,7 +8,7 @@ import { FormGeneratorService } from './form-generator.service'
 })
 export class FormGeneratorComponent implements OnInit {
 
-  public formElements;
+  public formElements:Array<FormElementData> = [];
   constructor(
     public formGeneratorService: FormGeneratorService
   ){ }
@@ -28,7 +29,7 @@ export class FormGeneratorComponent implements OnInit {
     let self=this;
     let response=this.formGeneratorService.getChildsForParentFromDb('root');
     response.then(function(resoult){
-      self.formElements = resoult;
+      self.formElements = resoult as Array<FormElementData>;
 
       self.formElements.map((element, i) => {
         let number=i+1

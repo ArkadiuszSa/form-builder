@@ -1,6 +1,6 @@
 
 <form class='form-preview'>
-  <fieldset class='form-fieldset' >
+  <fieldset class='form-fieldset' *ngIf='answersList?.length>0' >
 
       <ng-container *ngFor='let answer of answersList'>
         <div class='answer-container'>
@@ -8,7 +8,6 @@
             <p>{{answer.question}}</p>
             <p>{{answer.answer}} </p>
         </div>
-
       </ng-container>
   </fieldset>
 </form>

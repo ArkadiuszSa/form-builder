@@ -1,11 +1,19 @@
 import { Injectable } from '@angular/core';
+import {  OnInit } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ResultFormService {
+export class ResultFormService implements OnInit {
 
-  constructor() { }
+  constructor() {
+    console.log('heheszki')
+   }
+
+
+  ngOnInit(){
+
+  }
 
   public getAll() {
    let self=this;

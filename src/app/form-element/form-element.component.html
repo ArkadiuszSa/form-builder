@@ -19,7 +19,7 @@
                     Condition is required
                   </div>
                   <div class='alert-container' *ngIf="checkNumber(formElementModel.condition.value)&& formElementModel.type === 'Number' && (condition?.dirty || condition?.touched)">
-                    Answer must be a number
+                    Condition value must be a number
                   </div>
                 </ng-container>
                 
@@ -70,7 +70,7 @@
       
       <div *ngFor='let element of subInputList'>
           <app-form-element class='form-container' 
-            [elementData] = "element"
+            [formElementData] = "element"
             (removeElement) = "removeChild($event)"
         ></app-form-element> 
       </div>

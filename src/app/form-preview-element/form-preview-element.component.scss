@@ -7,9 +7,7 @@
     
     .form-input {
         flex: 1;
-        //height: 28px;
         width: 100%;
-        //padding-left: 13px;
         border-width: 0px 0px 1px 0px;
         border-style: solid;
         border-color: black;
@@ -21,14 +19,14 @@
     }
     .question-paragraph{
         margin-bottom: 10px;
-        margin-top:10px;
-        font-size:1.2em;
+        margin-top: 10px;
+        font-size: 1.2em;
 
     }
     .question-label{
-        color:#42a7f4;
+        color: #42a7f4;
         font-weight: bold;
-        font-size:1.2em;
+        font-size: 1.2em;
     }
     .alert-container{
         color: red;
@@ -36,8 +34,7 @@
 }
 
 .radio-container {
-    display:flex;
-    
+    display: flex;
     flex: 1;
     height: 20px;
     margin-top:15px;
@@ -97,10 +94,17 @@
 
 @media only screen and (max-width: 800px) {
     .form-section{
-        font-size:14px !important;
+        font-size: 14px !important;
     }
- 
-
+    .form-input {
+        font-size: 14px !important;
+    }
+    .question-paragraph{
+        font-size: 14px !important;    
+    }
+    .question-label{
+        font-size: 14px !important;    
+    }
 }
 
 
