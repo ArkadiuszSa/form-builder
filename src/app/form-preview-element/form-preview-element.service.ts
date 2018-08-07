@@ -30,7 +30,6 @@ export class FormPreviewElementService {
     this.listOfAnswers = [] ;
   }
 
-
   public saveAnswersToDb() {
     function compare(a,b){
       return a.number-b.number;
@@ -41,8 +40,26 @@ export class FormPreviewElementService {
       for(let answer of this.listOfAnswers ){
         self.addAnswerToDb(answer);
       }
-      
     })
+  }
+
+  public ifValidSaveToDb(): boolean{
+    let valid = true;
+    for( let answer of this.listOfAnswers){
+      if( !(typeof answer.question!== 'undefined' && 
+      typeof answer.answer!== 'undefined' &&
+      answer.question!=='' && answer.answer!=='')
+      ){
+        valid=false;
+      }
+    }
+    
+    if(valid){
+      this.saveAnswersToDb();
+      return true;
+    }else{
+      return false;
+    }
   }
 
   public addAnswerToDb(answer){
@@ -92,30 +109,4 @@ export class FormPreviewElementService {
     });
   }
 
-  public getAll() {
-   
-    var requestDb = indexedDB.open("AnswerDatabase", 1);
-    let response = [];
-    requestDb.onupgradeneeded = function() {
-      var db = requestDb.result;
-      var store = db.createObjectStore("AnswerStore", {keyPath: "_id"});
-    };
-    
-      requestDb.onsuccess = function() {
-        var db = requestDb.result;
-        var tx = db.transaction("AnswerStore", "readwrite");
-        var store = tx.objectStore("AnswerStore");
-  
-        let getChildren = store.getAll()
-  
-        getChildren.onsuccess = () => {
-          response = getChildren.result;
-        }
-  
-        tx.oncomplete = function() {
-          db.close;
-        }
-      }
-    
-  }
 }

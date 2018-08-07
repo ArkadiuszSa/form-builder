@@ -16,6 +16,17 @@
         padding-left: 25px;
         padding-right:25px;
         margin-top: 30px;
+
+        .valid-response{
+            color: #42a7f4;
+            font-family: Arimo;
+            font-size:1.2em;
+        }
+        .invalid-response{
+            color: red;
+            font-family: Arimo;
+            font-size:1.2em;
+        }
     }
 
     .save-button {

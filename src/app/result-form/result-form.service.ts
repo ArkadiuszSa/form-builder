@@ -1,21 +1,11 @@
 import { Injectable } from '@angular/core';
-import {  OnInit } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ResultFormService implements OnInit {
+export class ResultFormService  {
 
-  constructor() {
-    console.log('heheszki')
-   }
-
-
-  ngOnInit(){
-
-  }
-
-  public getAll() {
+  public getAnswersFromDb() {
    let self=this;
     var requestDb = indexedDB.open("AnswerDatabase", 1);
     requestDb.onupgradeneeded = function() {
@@ -32,7 +22,6 @@ export class ResultFormService implements OnInit {
         getChildren.onsuccess = () => {
           resolve(self.sortList(getChildren.result)); 
         }
-  
         tx.oncomplete = function() {
           db.close;
         }

@@ -7,6 +7,9 @@
       [elementData] = "element"
       ></app-form-preview-element>
       </ng-container>
+
+    <p class = 'invalid-response' *ngIf = 'saveState.valid === false && saveState.dirty === true'>Fill all inputs correctly please!</p>
+    <p class = 'valid-response' *ngIf = 'saveState.valid === true && saveState.dirty === true'>Data has been saved successfully!</p>
   </fieldset>
 
   <button class='save-button' (click) = 'saveAnswers()' >Save</button>

@@ -10,6 +10,10 @@ import { FormElementData} from './form-element-data.model'
 export class FormPreviewComponent implements OnInit {
 
   public formElements:Array<FormElementData>;
+  public saveState = {
+    dirty: false,
+    valid: true
+  }
   constructor(
     public formGeneratorService: FormGeneratorService,
     public formPreviewElementService: FormPreviewElementService
@@ -35,6 +39,15 @@ export class FormPreviewComponent implements OnInit {
   }
 
   saveAnswers(){
-    this.formPreviewElementService.saveAnswersToDb();
+    let result = this.formPreviewElementService.ifValidSaveToDb();
+    this.saveState.dirty = true;
+    if(result){
+      console.log('weszlo')
+      this.saveState.valid = true;
+    }else{
+      console.log('nieweszlo')
+
+      this.saveState.valid = false;    
+    }
   }
 }

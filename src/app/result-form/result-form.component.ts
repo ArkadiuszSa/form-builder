@@ -14,7 +14,7 @@ export class ResultFormComponent implements OnInit {
 
   ngOnInit() {
     let self=this;
-    this.resultFormService.getAll().then((res:Array<Answer>) => {
+    this.resultFormService.getAnswersFromDb().then((res:Array<Answer>) => {
       if(Array.isArray(res)){
         self.answersList = res;
       }

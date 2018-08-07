@@ -17,10 +17,10 @@ export class FormGeneratorComponent implements OnInit {
     this.reloadRootFormElements();
   }
 
-  addInputOnClick(){
+  addInputOnClick() {
     let self=this;
     let response = this.formGeneratorService.addElementToDatabase('root');
-    response.then( (res)=>{
+    response.then( (res) => {
      self.reloadRootFormElements();
     })
   }
@@ -32,13 +32,13 @@ export class FormGeneratorComponent implements OnInit {
       self.formElements = resoult as Array<FormElementData>;
 
       self.formElements.map((element, i) => {
-        let number=i+1
+        let number:number = i+1
         element.number=number.toString();
       })
     })
   }
 
-  removeChild($event){
+  removeChild($event) {
     let index= this.formElements.indexOf($event);
     this.formElements.splice(index,1);    
   }

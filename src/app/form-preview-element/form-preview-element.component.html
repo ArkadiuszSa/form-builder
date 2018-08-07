@@ -17,11 +17,11 @@
     <div class = 'radio-container'>
 
     <label class='container'>
-      <input type="radio" name='yesNo' value='yes' (change)='radioButtonChecked("yes")' >
+      <input type="radio" [name]='elementData._id' value='yes' (change)='radioButtonChecked("yes")' >
       <span class='checkmark' ></span>Yes
   </label>
   <label class='container'>
-      <input type="radio" name='yesNo' (change)='radioButtonChecked("no")' value='no' >
+      <input type="radio" [name]='elementData._id' (change)='radioButtonChecked("no")' value='no' >
       <span class='checkmark' ></span>No
   </label>
 </div>
