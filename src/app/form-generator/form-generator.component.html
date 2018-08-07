@@ -1,0 +1,12 @@
+<div class='form-generator-content'>
+
+  <ng-container *ngFor='let element of formElements'>
+      <app-form-element class='form-container' 
+        [elementData] = "element"
+        (removeElement) = "removeChild($event)"
+      ></app-form-element> 
+  </ng-container>
+    
+
+  <button class='add-input-button' (click)='addInputOnClick()'>Add Input</button>
+</div>

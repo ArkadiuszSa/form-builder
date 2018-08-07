@@ -1,0 +1,14 @@
+
+<form class='form-preview'>
+  <fieldset class='form-fieldset' *ngIf='formElements?.length>0'>
+
+      <ng-container *ngFor='let element of formElements'>
+          <app-form-preview-element
+      [elementData] = "element"
+      ></app-form-preview-element>
+      </ng-container>
+  </fieldset>
+
+  <button class='save-button' (click) = 'saveAnswers()' >Save</button>
+  
+</form>

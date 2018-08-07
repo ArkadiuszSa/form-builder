@@ -1,0 +1,31 @@
+*:focus{
+    outline:none;
+}
+nav{
+    min-width: 360px;
+    background: #42a7f4;
+    color: white;
+    font-family: Arimo; 
+    .logo{
+        font-size: 2em;
+        text-align: center;
+        margin: 0;
+        padding-top: 30px;
+        font-weight: bold;    
+    }
+    .toolbar{
+        text-align: center;
+        height:35px;
+        .nav-link{
+            padding: 10px;
+            font-size: 1.5em;
+            cursor: pointer;
+        }
+        .nav-link:hover{
+            font-size: 1.6em;
+        }
+        .active-link{
+            text-decoration: underline;
+        }
+    }
+}

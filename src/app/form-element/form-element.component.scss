@@ -1,0 +1,158 @@
+*:focus{
+    outline: none;
+}
+
+.form-container {
+    margin-top: 30px;
+    //width: 50%;
+    width: 700px;
+    .question-number {
+        color:#42a7f4;
+        font-weight: bold;
+        font-size: 1.2em;
+    }
+    .form-field {
+        display: flex;
+        font-size: 1.2em;
+        flex-wrap: wrap;
+
+        .field-label {
+            display: flex;
+            align-items: center;
+            width: 77px;
+        }
+        .field-input {
+            flex: 1;
+            height: 35px;
+            margin-left: 20px;
+            padding-left: 13px;
+            padding-top:0;
+            padding-bottom:0;
+            margin-bottom:0;
+            border-width: 0px 0px 1px 0px;
+            border-style: solid;
+            border-color: black;
+        } 
+        .field-input:focus{
+            border-color: #42a7f4;
+        }
+        .text-input{
+            padding-left: 17px;
+            height: 34px;
+        }
+        .radio-container {
+            display:flex;
+            justify-content: center;
+            align-items: center;
+            flex: 1;
+            height: 20px;
+            margin-top:15px;
+            input{
+                
+                //
+                position: absolute;
+                opacity: 0;
+                cursor: pointer;
+                height: 29px;
+                width: 70px;
+                left: 10px;
+            }
+            .container{
+                width: 70px;
+                text-align: right;
+                height: 29px;
+                margin-left: 5px;
+                display: block;
+                position: relative;
+                
+                margin-bottom: 12px;
+                cursor: pointer;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+            }
+            .container input {
+                position: absolute;
+                opacity: 0;
+                cursor: pointer;
+            }
+            .checkmark {
+                position: absolute;
+                top: 0;
+                left: 12px;
+                height: 25px;
+                width: 25px;
+                background-color: #eee;
+                border-radius: 50%;
+            }
+            .container:hover input ~ .checkmark {
+                background-color: #ccc;
+            }
+            .container input:checked ~ .checkmark {
+                background-color: #2196F3;
+            }
+            .checkmark:after {
+                content: "";
+                position: absolute;
+                display: none;
+            }
+            .container input:checked ~ .checkmark:after {
+                display: block;
+            }
+        }
+    }
+    .alert-container{
+        color: red;
+        margin-left:100px;
+    }
+
+    .actions-container {
+        display: flex;
+        justify-content: flex-end;
+        
+        .action-button {
+            padding:10px;
+            margin-left: 10px;
+            font-size: 1.2em;
+            border: 2px solid;
+            border-radius: 5px;
+            -moz-transistion: all 0.2s;
+            -webkit-transition: all 0.2s;
+            transition: all 0.2s;
+            cursor: pointer;
+
+        }
+        .add-button {
+            color: #42a7f4;
+            background: white;
+            border-color: #42a7f4;
+        }
+        .delete-button {
+            color: red;
+            background: white;
+            border-color: red;
+        }
+        .add-button:hover {
+            color: white;
+            background-color: #42a7f4;
+        }
+        .delete-button:hover {
+            color: white;
+            background-color: red;
+        }
+    }
+}
+.form-wrapper{
+    width: 700px;
+    margin-left:40px;
+    display:flex;
+    align-content: center;
+    align-items: center;
+
+    justify-content: center;
+    flex-direction: column;
+
+    // border-style: dashed;
+    // border-color: #42a7f4
+}

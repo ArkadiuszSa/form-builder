@@ -1,0 +1,36 @@
+
+<div class='form-section'>
+  <label class='question-label'>Question nr. {{elementData.number}}</label>
+  <p class='question-paragraph'>{{formElementModel.question}}</p>
+  <ng-container *ngIf='formElementModel.type!=="Yes/No";else yesNoType'>
+    <input  class='form-input' #answerM="ngModel" [(ngModel)]='answer' (blur)='checkCondition()'>
+    <div class='alert-container' *ngIf="answer === '' && (answerM.dirty || answerM.touched)">
+      Answer is required
+    </div>
+    <div class='alert-container' *ngIf="checkNumber(answer)&& formElementModel.type === 'Number' && (answerM.dirty || answerM.touched)">
+      Answer must be a number
+    </div>
+  </ng-container>
+
+  
+  <ng-template #yesNoType>
+    <div class = 'radio-container'>
+
+    <label class='container'>
+      <input type="radio" name='yesNo' value='yes' (change)='radioButtonChecked("yes")' >
+      <span class='checkmark' ></span>Yes
+  </label>
+  <label class='container'>
+      <input type="radio" name='yesNo' (change)='radioButtonChecked("no")' value='no' >
+      <span class='checkmark' ></span>No
+  </label>
+</div>
+
+  </ng-template>
+  <ng-container *ngFor='let element of formElements'>
+    <app-form-preview-element
+      [elementData] = "element"
+    ></app-form-preview-element>
+  </ng-container>
+
+</div>
