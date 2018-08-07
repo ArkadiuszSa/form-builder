@@ -1,0 +1,14 @@
+
+<form class='form-preview'>
+  <fieldset class='form-fieldset' >
+
+      <ng-container *ngFor='let answer of answersList'>
+        <div class='answer-container'>
+            <p class='question-number'>Question nr. {{answer.number}}</p>
+            <p>{{answer.question}}</p>
+            <p>Answer: {{answer.answer}} </p>
+        </div>
+
+      </ng-container>
+  </fieldset>
+</form>
