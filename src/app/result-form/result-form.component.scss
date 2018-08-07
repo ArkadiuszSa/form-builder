@@ -4,10 +4,13 @@
     align-items: center;
     min-width: 360px;
     font-size:1.2em;
+    
     font-family: Arimo;
     .form-fieldset{
         display:flex;
         flex-direction: column;
+        padding-left: 25px;
+        padding-right: 25px;
         width:80%;
         margin-top:30px;
 
@@ -17,4 +20,12 @@
             
         }
     }
+}
+
+@media only screen and (max-width: 800px) {
+    .form-preview{
+        font-size:14px !important;
+    }
+ 
+
 }

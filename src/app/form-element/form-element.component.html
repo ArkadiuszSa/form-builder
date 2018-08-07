@@ -41,8 +41,10 @@
         
       
         <div class='form-field'>
-          <label class='field-label'> Question </label>
-          <input class='field-input text-input question-input' name="question" [(ngModel)]='formElementModel.question' #question="ngModel" (blur)='modelChange()'>  
+          <div class='question-container'>
+            <label class='field-label'> Question </label>
+            <input class='field-input text-input question-input' name="question" [(ngModel)]='formElementModel.question' #question="ngModel" (blur)='modelChange()'>  
+         </div>
           <div class='alert-container' *ngIf="formElementModel.question === '' && (question.dirty || question.touched)">
               Question is required
           </div>
