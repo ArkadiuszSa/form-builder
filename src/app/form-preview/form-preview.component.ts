@@ -21,15 +21,18 @@ export class FormPreviewComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.reloadRootFormElements();
     this.formPreviewElementService.resetAnswerList();
+    this.reloadRootFormElements();
   }
 
   reloadRootFormElements() {
     let self=this;
     let response = this.formGeneratorService.getChildsForParentFromDb('root');
-    response.then(function(resoult){
-      self.formElements = resoult as Array<FormElementData>;
+    response.then(function(result){
+      if(Array.isArray(result)){
+        self.formElements=self.filterForBlankQuestions(result)
+      }
+      
       self.formElements.map((element :FormElementData, i: number) => {
         let number:number = i+1
         element.number=number.toString();
@@ -42,12 +45,16 @@ export class FormPreviewComponent implements OnInit {
     let result = this.formPreviewElementService.ifValidSaveToDb();
     this.saveState.dirty = true;
     if(result){
-      console.log('weszlo')
       this.saveState.valid = true;
     }else{
-      console.log('nieweszlo')
-
       this.saveState.valid = false;    
     }
+  }
+
+  filterForBlankQuestions(list:Array<FormElementData>) {
+    let filtredList = list.filter( (element)=>{
+      return typeof element.question!=='undefined' && element.question!==''
+    })
+    return filtredList;
   }
 }

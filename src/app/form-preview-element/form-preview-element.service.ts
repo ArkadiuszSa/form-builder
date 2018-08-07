@@ -8,22 +8,48 @@ export class FormPreviewElementService {
   constructor() { }
 
   public addAnswerToList(answer){
+    
     function findAnswer(element) {
       return element._id === answer._id;
     }
     let index=this.listOfAnswers.findIndex( findAnswer);
 
+    if(index === -1){
     this.listOfAnswers.push(answer);
+    }
+  }
+
+  public removeChildsFromList(answer) {
+    
+    function findAnswer(element) {
+      return element.parentId === answer._id;
+    }
+
+    let index = this.listOfAnswers.findIndex( findAnswer);
+    let listOfChilds= this.listOfAnswers.filter( (element) =>{
+      return element.parentId === answer._id;
+    })
+
+    for(let element of listOfChilds) {
+      this.removeChildsFromList(element)
+    }
+
+    if(index!==-1){
+      this.listOfAnswers.splice(index,1);
+    }
   }
 
   public updateAnswer(answer){
+
     function findAnswer(element) {
       return element._id === answer._id;
     }
+
     let index=this.listOfAnswers.findIndex( findAnswer);
     if(index!==-1){
       this.listOfAnswers[index]=answer;
     }
+
 
   }
   public resetAnswerList(){
@@ -48,13 +74,14 @@ export class FormPreviewElementService {
     for( let answer of this.listOfAnswers){
       if( !(typeof answer.question!== 'undefined' && 
       typeof answer.answer!== 'undefined' &&
-      answer.question!=='' && answer.answer!=='')
+      answer.question!=='' && answer.answer!=='')||
+      (answer.type==="Number"&& isNaN(answer.answer) )
       ){
         valid=false;
       }
     }
     
-    if(valid){
+    if(valid && this.listOfAnswers.length>0){
       this.saveAnswersToDb();
       return true;
     }else{
@@ -77,13 +104,13 @@ export class FormPreviewElementService {
           _id: answer._id,
           number:answer.number,
           answer:answer.answer,
+          type: answer.type,
           question: answer.question
         });
 
         tx.oncomplete = function() {
           db.close
         }
-        
       }
   }
 

@@ -29,6 +29,7 @@ export class FormPreviewElementComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    console.log(this.elementData)
     this.formElementModel.question = this.elementData.question;
     this.formElementModel.type = this.elementData.type;
     this.formElementModel.condition.type = this.elementData.condition.type;
@@ -44,14 +45,19 @@ export class FormPreviewElementComponent implements OnInit {
   }
 
   checkCondition() {
-
+    console.log('odpalam')
+    console.log(this.formElementModel.condition.type)
+    console.log(this.formElementModel.condition.value)
+    console.log(this.answer)
     if( (this.formElementModel.condition.type === 'Equals' && this.formElementModel.condition.value === this.answer) ||
         (this.formElementModel.condition.type === 'GratherThan' && this.formElementModel.condition.value < this.answer) ||
         (this.formElementModel.condition.type === 'LessThan' && this.formElementModel.condition.value > this.answer) 
     ){
+      console.log('ładuje dzieci')
       this.loadChildren();
     }
     else {
+      this.formPreviewElementService.removeChildsFromList(this.elementData)
       this.formElements = [];
     }
 
@@ -60,6 +66,7 @@ export class FormPreviewElementComponent implements OnInit {
       parentId: this.elementData.parentId,
       number: this.elementData.number,
       answer: this.answer,
+      type: this.formElementModel.type,
       question: this.formElementModel.question
     })
   }
@@ -67,14 +74,25 @@ export class FormPreviewElementComponent implements OnInit {
   loadChildren() {
     let self=this;
     let response=this.formGeneratorService.getChildsForParentFromDb(this.elementData._id);
-    response.then(function(resoult){
-      self.formElements = resoult as Array<FormElementData>;
+    response.then(function(result){
+      if(Array.isArray(result)){
+        console.log(result)
+        self.formElements = self.filterForBlankQuestions(result);
+        console.log(self.formElements)
+      }
       self.formElements.map((element :FormElementData, i:number) => {
         let number:number =i+1
         element.number = self.formElementModel.number +'.' +number.toString();
         element.parentId=self.elementData._id;
       })
     })
+  }
+
+  filterForBlankQuestions(list:Array<FormElementData>) {
+    let filtredList = list.filter( (element)=>{
+      return typeof element.question!=='undefined'&& element.question!==''
+    })
+    return filtredList;
   }
 
   radioButtonChecked(val:string) {
