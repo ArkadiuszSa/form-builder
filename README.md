@@ -1,6 +1,6 @@
 
 # Form Builder
-## [Live](https://form-builderx2.herokuapp.com/preview)
+## [Live](https://form-builderx2.herokuapp.com)
 
 The application consists of 3 views:
 * generating the form
