@@ -90,9 +90,12 @@ export class FormElementComponent implements OnInit {
   }
 
   modelChange(){
-    console.log(this.formElementModel)
     if(this.formElementModel.type === "Number" && this.lastType!=="Number" && this.checkNumber(this.formElementModel.condition.value) ){
       this.formElementModel.condition.value = '';
+    }
+    if(this.formElementModel.type==='Yes/No'){
+      this.formElementModel.condition.value = 'yes';
+
     }
     this.lastType=this.formElementModel.type;
     this.formGeneratorService.updateFormElement({

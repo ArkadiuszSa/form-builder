@@ -29,7 +29,6 @@ export class FormPreviewElementComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log(this.elementData)
     this.formElementModel.question = this.elementData.question;
     this.formElementModel.type = this.elementData.type;
     this.formElementModel.condition.type = this.elementData.condition.type;
@@ -45,15 +44,11 @@ export class FormPreviewElementComponent implements OnInit {
   }
 
   checkCondition() {
-    console.log('odpalam')
-    console.log(this.formElementModel.condition.type)
-    console.log(this.formElementModel.condition.value)
-    console.log(this.answer)
-    if( (this.formElementModel.condition.type === 'Equals' && this.formElementModel.condition.value === this.answer) ||
-        (this.formElementModel.condition.type === 'GratherThan' && this.formElementModel.condition.value < this.answer) ||
-        (this.formElementModel.condition.type === 'LessThan' && this.formElementModel.condition.value > this.answer) 
+    if( typeof this.answer !== 'undefined' && this.answer !== '' &&
+        (this.formElementModel.condition.type === 'Equals' && this.elementData.condition.value === this.answer) ||
+        (this.formElementModel.type==='Number' && parseFloat(this.answer) && this.formElementModel.condition.type === 'GratherThan' && parseFloat(this.formElementModel.condition.value) < parseFloat(this.answer)) ||
+        (this.formElementModel.type==='Number' && parseFloat(this.answer)  && this.formElementModel.condition.type === 'LessThan' && parseFloat(this.formElementModel.condition.value) > parseFloat(this.answer) ) 
     ){
-      console.log('ładuje dzieci')
       this.loadChildren();
     }
     else {
@@ -76,9 +71,7 @@ export class FormPreviewElementComponent implements OnInit {
     let response=this.formGeneratorService.getChildsForParentFromDb(this.elementData._id);
     response.then(function(result){
       if(Array.isArray(result)){
-        console.log(result)
         self.formElements = self.filterForBlankQuestions(result);
-        console.log(self.formElements)
       }
       self.formElements.map((element :FormElementData, i:number) => {
         let number:number =i+1
