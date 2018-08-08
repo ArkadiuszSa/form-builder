@@ -20,23 +20,23 @@ export class FormPreviewElementService {
   }
 
   public removeChildsFromList(answer) {
-    
     function findAnswer(element) {
-      return element.parentId === answer._id;
+      return element._id === answer._id;
     }
 
     let index = this.listOfAnswers.findIndex( findAnswer);
     let listOfChilds= this.listOfAnswers.filter( (element) =>{
       return element.parentId === answer._id;
     })
-
-    for(let element of listOfChilds) {
-      this.removeChildsFromList(element)
-    }
-
+    
+      for(let element of listOfChilds) {
+        this.removeChildsFromList(element)
+      }
+    
     if(index!==-1){
       this.listOfAnswers.splice(index,1);
     }
+
   }
 
   public updateAnswer(answer){

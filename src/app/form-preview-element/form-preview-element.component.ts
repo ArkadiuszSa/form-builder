@@ -53,28 +53,12 @@ export class FormPreviewElementComponent implements OnInit {
       (element.type==='Number' && parseFloat(this.answer) && element.condition.type === 'GratherThan' && parseFloat(element.condition.value) < parseFloat(this.answer)) ||
       (element.type==='Number' && parseFloat(this.answer)  && element.condition.type === 'LessThan' && parseFloat(element.condition.value) > parseFloat(this.answer) ) 
   ){
-    console.log('tutej')
     element.show=true;
   }else{
-    console.log('abos')
     element.show=false;
+    this.formPreviewElementService.removeChildsFromList(element)
   }
     }
-
-
-
-
-    // if( typeof this.answer !== 'undefined' && this.answer !== '' &&
-    //     (this.formElementModel.condition.type === 'Equals' && this.elementData.condition.value === this.answer) ||
-    //     (this.formElementModel.type==='Number' && parseFloat(this.answer) && this.formElementModel.condition.type === 'GratherThan' && parseFloat(this.formElementModel.condition.value) < parseFloat(this.answer)) ||
-    //     (this.formElementModel.type==='Number' && parseFloat(this.answer)  && this.formElementModel.condition.type === 'LessThan' && parseFloat(this.formElementModel.condition.value) > parseFloat(this.answer) ) 
-    // ){
-    //   this.loadChildren();
-    // }
-    // else {
-    //   this.formPreviewElementService.removeChildsFromList(this.elementData)
-    //   this.formElements = [];
-    // }
 
     this.formPreviewElementService.updateAnswer({
       _id: this.elementData._id,
