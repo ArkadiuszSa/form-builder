@@ -41,20 +41,40 @@ export class FormPreviewElementComponent implements OnInit {
       number: this.elementData.number,
       answer: ''
     })
+
+    this.loadChildren();
   }
 
   checkCondition() {
-    if( typeof this.answer !== 'undefined' && this.answer !== '' &&
-        (this.formElementModel.condition.type === 'Equals' && this.elementData.condition.value === this.answer) ||
-        (this.formElementModel.type==='Number' && parseFloat(this.answer) && this.formElementModel.condition.type === 'GratherThan' && parseFloat(this.formElementModel.condition.value) < parseFloat(this.answer)) ||
-        (this.formElementModel.type==='Number' && parseFloat(this.answer)  && this.formElementModel.condition.type === 'LessThan' && parseFloat(this.formElementModel.condition.value) > parseFloat(this.answer) ) 
-    ){
-      this.loadChildren();
+
+    for(let element of this.formElements){
+      if( typeof this.answer !== 'undefined' && this.answer !== '' &&
+      (element.condition.type === 'Equals' && element.condition.value === this.answer) ||
+      (element.type==='Number' && parseFloat(this.answer) && element.condition.type === 'GratherThan' && parseFloat(element.condition.value) < parseFloat(this.answer)) ||
+      (element.type==='Number' && parseFloat(this.answer)  && element.condition.type === 'LessThan' && parseFloat(element.condition.value) > parseFloat(this.answer) ) 
+  ){
+    console.log('tutej')
+    element.show=true;
+  }else{
+    console.log('abos')
+    element.show=false;
+  }
     }
-    else {
-      this.formPreviewElementService.removeChildsFromList(this.elementData)
-      this.formElements = [];
-    }
+
+
+
+
+    // if( typeof this.answer !== 'undefined' && this.answer !== '' &&
+    //     (this.formElementModel.condition.type === 'Equals' && this.elementData.condition.value === this.answer) ||
+    //     (this.formElementModel.type==='Number' && parseFloat(this.answer) && this.formElementModel.condition.type === 'GratherThan' && parseFloat(this.formElementModel.condition.value) < parseFloat(this.answer)) ||
+    //     (this.formElementModel.type==='Number' && parseFloat(this.answer)  && this.formElementModel.condition.type === 'LessThan' && parseFloat(this.formElementModel.condition.value) > parseFloat(this.answer) ) 
+    // ){
+    //   this.loadChildren();
+    // }
+    // else {
+    //   this.formPreviewElementService.removeChildsFromList(this.elementData)
+    //   this.formElements = [];
+    // }
 
     this.formPreviewElementService.updateAnswer({
       _id: this.elementData._id,

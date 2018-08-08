@@ -3,6 +3,7 @@
   <ng-container *ngFor='let formElement of formElements'>
       <app-form-element class='form-container' 
         [formElementData] = "formElement"
+        [reciveParentType] ="sendParentType"
         (removeElement) = "removeChild($event)"
       ></app-form-element> 
   </ng-container>

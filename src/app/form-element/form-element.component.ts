@@ -10,6 +10,7 @@ import { FormElementData } from './form-element-data.model'
 
 export class FormElementComponent implements OnInit {
   @Input() formElementData: FormElementData;
+  @Input() reciveParentType;
   @Output() removeElement:EventEmitter<any> = new EventEmitter<any>();
 
   public formElementModel: FormElement = {
@@ -25,12 +26,15 @@ export class FormElementComponent implements OnInit {
   
   public subInputList: Array<FormElementData> = [];
   private lastType: string;
+  public parentType: string;
+  public sendParentType;
   constructor(
     public formGeneratorService: FormGeneratorService
 
   ) { }
 
   ngOnInit() {
+    
     this.reloadChilds();
     this.formElementModel.question = this.formElementData.question;
     this.formElementModel.type = this.formElementData.type;
@@ -38,7 +42,11 @@ export class FormElementComponent implements OnInit {
     this.formElementModel.condition.value = this.formElementData.condition.value;
     this.formElementModel.number = this.formElementData.number;
     this.lastType = this.formElementData.type;
+    this.sendParentType=this.formElementModel.type;
+
   }
+
+
 
   addSubInput(){
     let self = this;
@@ -90,13 +98,11 @@ export class FormElementComponent implements OnInit {
   }
 
   modelChange(){
+    this.sendParentType=this.formElementModel.type;
     if(this.formElementModel.type === "Number" && this.lastType!=="Number" && this.checkNumber(this.formElementModel.condition.value) ){
       this.formElementModel.condition.value = '';
     }
-    if(this.formElementModel.type==='Yes/No'){
-      this.formElementModel.condition.value = 'yes';
 
-    }
     this.lastType=this.formElementModel.type;
     this.formGeneratorService.updateFormElement({
       _id: this.formElementData._id,

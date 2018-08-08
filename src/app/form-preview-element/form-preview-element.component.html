@@ -28,7 +28,8 @@
 
   </ng-template>
   <ng-container *ngFor='let element of formElements'>
-    <app-form-preview-element
+    
+    <app-form-preview-element *ngIf='element.show'
       [elementData] = "element"
     ></app-form-preview-element>
   </ng-container>

@@ -3,22 +3,22 @@
     <form class='form-container'>
         <fieldset>
         <p class='question-number'>Question nr. {{formElementModel.number}}</p>
-        <ng-container *ngIf='formElementModel.condition.active'>
+        <ng-container *ngIf='formElementData.parentId!=="root"'>
             <div class='form-field'>
               <label class='field-label'> Condition </label>
               <select class='field-input' name="condition-type" [(ngModel)]='formElementModel.condition.type' (blur)='modelChange()'>
                 <option value='Equals'> Equals </option>
-                <option value='GratherThan' [disabled]='formElementModel.type!=="Number"'> Grather than </option>
-                <option value='LessThan' [disabled]='formElementModel.type!=="Number"'> Less than </option>
+                <option value='GratherThan' [disabled]='reciveParentType!=="Number"'> Grather than </option>
+                <option value='LessThan' [disabled]='reciveParentType!=="Number"'> Less than </option>
               </select>
 
-                <ng-container *ngIf='formElementModel.type !== "Yes/No"; else yesNoInput'>
+                <ng-container *ngIf='reciveParentType !== "Yes/No"; else yesNoInput'>
                   <input   class='field-input text-input' name="condition-value" [(ngModel)]='formElementModel.condition.value' #condition="ngModel" (blur)='modelChange()'>
                   <br>
-                  <div class='alert-container' *ngIf="formElementModel.condition.value === '' && formElementModel.type!=='Yes/No' && (condition?.dirty || condition?.touched)">
+                  <div class='alert-container' *ngIf="formElementModel.condition.value === '' && reciveParentType!=='Yes/No' && (condition?.dirty || condition?.touched)">
                     Condition is required
                   </div>
-                  <div class='alert-container' *ngIf="checkNumber(formElementModel.condition.value)&& formElementModel.type === 'Number' && (condition?.dirty || condition?.touched)">
+                  <div class='alert-container' *ngIf="checkNumber(formElementModel.condition.value)&& reciveParentType === 'Number' && (condition?.dirty || condition?.touched)">
                     Condition value must be a number
                   </div>
                 </ng-container>
@@ -71,7 +71,9 @@
       <div *ngFor='let element of subInputList'>
           <app-form-element class='form-container' 
             [formElementData] = "element"
+            [reciveParentType] ="sendParentType"
             (removeElement) = "removeChild($event)"
+            
         ></app-form-element> 
       </div>
 </div>

@@ -121,6 +121,7 @@ export class FormGeneratorService {
           parentId: parentId,
           question: '',
           type: 'Text',
+          show: false,
           condition: {
             type: 'Equals',
             value: ''
