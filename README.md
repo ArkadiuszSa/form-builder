@@ -1,27 +1,12 @@
-# RecruitmentTask
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.1.1.
+# Form Builder
+## [Live](https://form-builderx2.herokuapp.com/preview)
 
-## Development server
+The application consists of 3 views:
+* generating the form
+* preview of the form
+* and the results of the form
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+The progress of generating the form and is saved in the indexeddb database. The preview view is only used to complete the form and save the data, changes are not saved here, after the card has been closed, the changes will be lost. The data from the last view is also saved to the database. In addition, the app does not include the question without content in the preview and should validate the data, both during the construction and when using the form.
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+If you want to run the project locally, simply install the packages using yarn installl and run ng serve --open.
