@@ -94,16 +94,20 @@
 
 @media only screen and (max-width: 800px) {
     .form-section{
-        font-size: 14px !important;
+        font-size: 17px !important;
     }
     .form-input {
-        font-size: 14px !important;
+        font-size: 17px !important;
     }
     .question-paragraph{
-        font-size: 14px !important;    
+        font-size: 17px !important;    
     }
     .question-label{
-        font-size: 14px !important;    
+        font-size: 17px !important;    
+    }
+
+    .radio-container {
+        font-size: 17px !important;
     }
 }
 

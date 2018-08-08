@@ -53,3 +53,18 @@
     
     
 }
+
+@media only screen and (max-width: 800px) {
+    .save-button{
+        font-size:17px !important;
+    } 
+    .valid-response{
+        
+        font-size:17px !important;
+    }
+    .invalid-response{
+        
+        font-size:17px !important;
+    }
+
+}
