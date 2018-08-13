@@ -5,7 +5,7 @@
         <p class='question-number'>Question nr. {{formElementModel.number}}</p>
         <ng-container *ngIf='formElementData.parentId!=="root"'>
             <div class='form-field'>
-              <label class='field-label'> Condition </label>
+              <label class='field-label'> Condition: </label>
               <select class='field-input' name="condition-type" [(ngModel)]='formElementModel.condition.type' (blur)='modelChange()'>
                 <option value='Equals'> Equals </option>
                 <option value='GratherThan' [disabled]='reciveParentType!=="Number"'> Grather than </option>
@@ -26,11 +26,11 @@
               <ng-template #yesNoInput>
                   <div class = 'radio-container'>
                     <label class='container'>
-                        <input type="radio" name='yesNo' value='yes' (change)='radioButtonChecked("yes")'  checked >
+                        <input type="radio" name='yesNo' value='yes' (change)='radioButtonChecked("yes")' [checked]='formElementModel.condition.value==="yes"'>
                         <span class='checkmark' ></span>Yes
                     </label>
                     <label class='container'>
-                        <input type="radio" name='yesNo' value='no' (change)='radioButtonChecked("no")'>
+                        <input type="radio" name='yesNo' value='no' (change)='radioButtonChecked("no")' [checked]='formElementModel.condition.value==="no"'>
                         <span class='checkmark' ></span>No
                     </label>
 
@@ -42,7 +42,7 @@
       
         <div class='form-field'>
           <div class='question-container'>
-            <label class='field-label'> Question </label>
+            <label class='field-label'> Question: </label>
             <input class='field-input text-input question-input' name="question" [(ngModel)]='formElementModel.question' #question="ngModel" (blur)='modelChange()'>  
          </div>
           <div class='alert-container' *ngIf="formElementModel.question === '' && (question.dirty || question.touched)">
@@ -52,7 +52,7 @@
 
       
         <p class='form-field'>
-          <label class='field-label'> Type </label>
+          <label class='field-label'> Type: </label>
           <select class='field-input' name="type-value" [(ngModel)]='formElementModel.type' (change)='typeChange()' (change)='modelChange()'>
             <option value='Text'> Text </option>
             <option value='Number'> Number </option>
@@ -73,7 +73,6 @@
             [formElementData] = "element"
             [reciveParentType] ="sendParentType"
             (removeElement) = "removeChild($event)"
-            
-        ></app-form-element> 
+          ></app-form-element> 
       </div>
 </div>

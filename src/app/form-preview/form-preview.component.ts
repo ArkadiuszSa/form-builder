@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGeneratorService } from './../form-generator/form-generator.service'
-import { FormPreviewElementService } from './../form-preview-element/form-preview-element.service'
+import { FormPreviewElementService } from './form-preview-element/form-preview-element.service'
 import { FormElementData} from './form-element-data.model'
 @Component({
   selector: 'app-form-preview',

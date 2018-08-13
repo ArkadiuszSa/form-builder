@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { FormGeneratorService } from './../form-generator/form-generator.service'
+import { FormGeneratorService } from './../form-generator.service'
 import { FormElement } from './form-element.model'
 import { FormElementData } from './form-element-data.model'
 @Component({
@@ -43,7 +43,6 @@ export class FormElementComponent implements OnInit {
     this.formElementModel.number = this.formElementData.number;
     this.lastType = this.formElementData.type;
     this.sendParentType=this.formElementModel.type;
-
   }
 
 

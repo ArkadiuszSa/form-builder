@@ -19,6 +19,9 @@ export class ResultFormComponent implements OnInit {
         self.answersList = res;
       }
     });
+
+    // this.resultFormService.testDb1();
+    this.resultFormService.testDb2();
   }
 
 }

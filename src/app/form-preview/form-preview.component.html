@@ -12,6 +12,8 @@
     <p class = 'valid-response' *ngIf = 'saveState.valid === true && saveState.dirty === true'>Data has been saved successfully!</p>
   </fieldset>
 
-  <button class='save-button' (click) = 'saveAnswers()' >Save</button>
-  
+  <button class='save-button' *ngIf='formElements?.length > 0; else information' (click) = 'saveAnswers()' >Save</button>
+  <ng-template #information>
+    <p class='information'>The form does not contain a correct question</p>  
+  </ng-template>
 </form>

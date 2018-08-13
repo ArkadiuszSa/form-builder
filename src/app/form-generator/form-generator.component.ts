@@ -10,8 +10,9 @@ export class FormGeneratorComponent implements OnInit {
 
   public formElements:Array<FormElementData> = [];
   constructor(
-    public formGeneratorService: FormGeneratorService
-  ){ }
+    public formGeneratorService: FormGeneratorService,
+  ){
+   }
 
   ngOnInit() {
     this.reloadRootFormElements();
@@ -42,4 +43,9 @@ export class FormGeneratorComponent implements OnInit {
     let index= this.formElements.indexOf($event);
     this.formElements.splice(index,1);    
   }
+
+  openDialog(){
+    
+  }
+
 }

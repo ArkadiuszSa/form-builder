@@ -14,11 +14,22 @@ nav{
         font-weight: bold;    
     }
     .toolbar{
-        text-align: center;
-        height:35px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height:50px;
+        box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14);
         .nav-link{
-            padding: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-decoration: none;
+            width:90px;
+            height:50px;
             font-size: 1.5em;
+            margin-left:5px;
+            margin-right:5px;
             cursor: pointer;
         }
         .nav-link:hover{

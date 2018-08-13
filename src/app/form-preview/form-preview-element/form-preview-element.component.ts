@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FormGeneratorService } from './../form-generator/form-generator.service'
+import { FormGeneratorService } from './../../form-generator/form-generator.service'
 import { FormPreviewElementService } from './form-preview-element.service'
 import { FormElement } from './form-element.model'
 import { FormElementData } from './form-element-data.model'
