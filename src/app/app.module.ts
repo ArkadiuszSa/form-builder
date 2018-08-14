@@ -8,7 +8,7 @@ import { AppRoutingModule } from './/app-routing.module';
 import { FormPreviewComponent } from './form-preview/form-preview.component';
 import { FormPreviewElementComponent } from './form-preview/form-preview-element/form-preview-element.component';
 import { ResultFormComponent } from './result-form/result-form.component';
-import { ModalComponent } from './core/components/modal/modal.component';
+import { ModalComponent } from './shared/components/modal/modal.component';
 
 @NgModule({
   declarations: [

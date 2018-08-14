@@ -21,7 +21,7 @@ export class ResultFormComponent implements OnInit {
     });
 
     // this.resultFormService.testDb1();
-    this.resultFormService.testDb2();
+    //this.resultFormService.testDb2();
   }
 
 }

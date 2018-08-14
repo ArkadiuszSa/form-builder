@@ -9,7 +9,6 @@ export class FormGeneratorService {
 
 
   public getChildsForParentFromDb(parentId) {
-   
     var requestDb = indexedDB.open("FormBuilderDatabase", 1);
     let response = [];
     requestDb.onupgradeneeded = function() {
@@ -18,23 +17,28 @@ export class FormGeneratorService {
       let index = store.createIndex("parentIdIndex", ["parentId"])
     };
     return new Promise((resolve, reject)=>{
-      requestDb.onsuccess = function() {
-        var db = requestDb.result;
-        var tx = db.transaction("FormStore", "readwrite");
-        var store = tx.objectStore("FormStore");
-        var index = store.index("parentIdIndex");
-  
-        let getChildren = index.getAll([parentId])
-  
-        getChildren.onsuccess = () => {
-          response = getChildren.result;
-          resolve(getChildren.result);
+
+        requestDb.onsuccess = function() {
+        
+          var db = requestDb.result;
+          var tx = db.transaction("FormStore", "readwrite");
+          var store = tx.objectStore("FormStore");
+          var index = store.index("parentIdIndex");
+          let getChildren;
+          try{
+             getChildren= index.getAll([parentId])
+          }catch(err){
+            reject();
+          }
+          getChildren.onsuccess = () => {
+            response = getChildren.result;
+            resolve(getChildren.result);
+          }
+         
+          tx.oncomplete = function() {
+            db.close;
+          }
         }
-  
-        tx.oncomplete = function() {
-          db.close;
-        }
-      }
     })
   }
 
@@ -133,6 +137,7 @@ export class FormGeneratorService {
           resolve(_id);
         }
       }
+
     });
   }
 }

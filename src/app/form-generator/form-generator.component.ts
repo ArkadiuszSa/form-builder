@@ -9,6 +9,7 @@ import { FormElementData } from './form-element-data.model'
 export class FormGeneratorComponent implements OnInit {
 
   public formElements:Array<FormElementData> = [];
+  public isIndexedDbSupported: boolean = true;
   constructor(
     public formGeneratorService: FormGeneratorService,
   ){
@@ -33,9 +34,11 @@ export class FormGeneratorComponent implements OnInit {
       self.formElements = resoult as Array<FormElementData>;
 
       self.formElements.map((element, i) => {
-        let number:number = i+1
+        let number:number = i+1;
         element.number=number.toString();
       })
+    },()=>{
+      this.isIndexedDbSupported = false;   
     })
   }
 
@@ -44,8 +47,5 @@ export class FormGeneratorComponent implements OnInit {
     this.formElements.splice(index,1);    
   }
 
-  openDialog(){
-    
-  }
 
 }
