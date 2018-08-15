@@ -7,4 +7,5 @@ export interface FormElement {
         type: string, 
         value: string
     }
+    required: boolean
 }

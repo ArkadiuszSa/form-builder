@@ -72,10 +72,10 @@ export class FormPreviewElementService {
   public ifValidSaveToDb(): boolean{
     let valid = true;
     for( let answer of this.listOfAnswers){
-      if( !(typeof answer.question!== 'undefined' && 
-      typeof answer.answer!== 'undefined' &&
-      answer.question!=='' && answer.answer!=='')||
-      (answer.type==="Number"&& isNaN(answer.answer) )
+      if( 
+      typeof answer.question=== 'undefined' || typeof answer.answer === 'undefined' ||
+      (answer.answer === '' && answer.required=== true ) ||
+      (answer.type==="Number" && isNaN(answer.answer) )
       ){
         valid=false;
       }

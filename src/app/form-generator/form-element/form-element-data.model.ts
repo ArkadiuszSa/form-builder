@@ -9,5 +9,6 @@ export interface FormElementData {
         type: string, 
         value: string
     }
+    required: boolean
     
 }

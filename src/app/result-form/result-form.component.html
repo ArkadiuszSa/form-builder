@@ -6,7 +6,10 @@
         <div class='answer-container'>
             <p class='question-number'>Question nr. {{answer.number}}</p>
             <p>{{answer.question}}</p>
-            <p class='answer-paragraph'>Answer: {{answer.answer}} </p>
+            <p *ngIf='answer.answer !== "";else noAnswer' class='answer-paragraph'>{{answer.answer}}</p>
+            <ng-template #noAnswer>
+              <p >User has not answered this question.</p>
+            </ng-template>
         </div>
       </ng-container>
   </fieldset>

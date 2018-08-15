@@ -126,6 +126,7 @@ export class FormGeneratorService {
           question: '',
           type: 'Text',
           show: false,
+          required: false,
           condition: {
             type: 'Equals',
             value: ''

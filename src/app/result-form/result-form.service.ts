@@ -1,4 +1,10 @@
 import { Injectable } from '@angular/core';
+import { Answer} from './answer.model'
+export interface AnswerData {
+  answer: string,
+  number: string,
+  question: string
+}
 
 @Injectable({
   providedIn: 'root'
@@ -23,13 +29,25 @@ export class ResultFormService  {
         let getChildren = store.getAll()
   
         getChildren.onsuccess = () => {
-          resolve(self.sortList(getChildren.result)); 
+          let answersData = self.sortList(getChildren.result);
+          answersData.map( (answerData)=>{
+            answerData=self.transformAnswerDataToAnswer(answerData);
+          })
+          resolve(answersData); 
         }
         tx.oncomplete = function() {
           db.close;
         }
       }
     });
+  }
+
+  private transformAnswerDataToAnswer(answerData):Answer{
+    return {
+      answer: answerData.answer,
+      number: answerData.number,
+      question: answerData.question
+    }
   }
 
   public sortList(answersList){

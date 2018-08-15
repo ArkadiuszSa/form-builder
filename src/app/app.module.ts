@@ -26,7 +26,6 @@ import { ModalComponent } from './shared/components/modal/modal.component';
     FormsModule      
   ],
   providers: [
-
   ],
   bootstrap: [AppComponent]
 })

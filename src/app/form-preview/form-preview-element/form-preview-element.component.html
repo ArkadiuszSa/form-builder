@@ -4,7 +4,7 @@
   <p class='question-paragraph'>{{formElementModel.question}}</p>
   <ng-container *ngIf='formElementModel.type!=="Yes/No";else yesNoType'>
     <input  class='form-input' #answerM="ngModel" [(ngModel)]='answer' (blur)='checkCondition()'>
-    <div class='alert-container' *ngIf="answer === '' && (answerM.dirty || answerM.touched)">
+    <div class='alert-container' *ngIf="answer === ''&& formElementModel.required && (answerM.dirty || answerM.touched)">
       Answer is required
     </div>
     <div class='alert-container' *ngIf="checkNumber(answer)&& formElementModel.type === 'Number' && (answerM.dirty || answerM.touched)">

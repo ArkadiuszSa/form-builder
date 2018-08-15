@@ -5,6 +5,7 @@ export interface FormElementData {
     type: string,
     number: string,
     show: boolean,
+    required: boolean,
     condition: {
         type: string, 
         value: string

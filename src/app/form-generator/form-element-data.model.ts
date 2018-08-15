@@ -4,6 +4,7 @@ export interface FormElementData {
     question: string,
     type: string,
     number: string,
+    required: boolean,
     condition: {
         active: boolean,
         type: string, 

@@ -53,12 +53,22 @@
       
         <p class='form-field'>
           <label class='field-label'> Type: </label>
-          <select class='field-input' name="type-value" [(ngModel)]='formElementModel.type' (change)='typeChange()' (change)='modelChange()'>
+          <select class='field-input' name="type-value" [(ngModel)]='formElementModel.type' (change)='typeChange()'>
             <option value='Text'> Text </option>
             <option value='Number'> Number </option>
             <option value='Yes/No'> Yes/No </option>
           </select> 
         </p>
+
+       
+          <div class = 'form-field required-container'>
+            <label class='field-label'>Required:</label>
+            <label class='required-checkbox'>
+                <input type="checkbox" name='checkbox' [(ngModel)]='formElementModel.required'  (change)='modelChange()'>
+                <span class='checkmark' ></span>
+            </label>
+          </div>
+        
       
         <div class='actions-container'>
           <button type='button' class='action-button add-button' (click)='addSubInput()'> Add Sub-Input </button>

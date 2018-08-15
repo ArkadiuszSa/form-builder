@@ -15,6 +15,7 @@ export class FormPreviewElementComponent implements OnInit {
     question:'',
     type:'',
     number: '',
+    required: false,
     condition: {
       active: '',
       type:'',
@@ -34,7 +35,7 @@ export class FormPreviewElementComponent implements OnInit {
     this.formElementModel.condition.type = this.elementData.condition.type;
     this.formElementModel.condition.value = this.elementData.condition.value;
     this.formElementModel.number = this.elementData.number;
-
+    this.formElementModel.required = this.elementData.required;
     this.formPreviewElementService.addAnswerToList({
       _id: this.elementData._id,
       parentId: this.elementData.parentId,
